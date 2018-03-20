@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { AccountService } from './accounts/account.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+  selector: 'App',
+  providers: [AccountService],
+  templateUrl: 'app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Railway App';
+  title = 'Angular App';
+  logoUrl = '/assets/logo.svg';
+
+  account: AccountService
+
+  constructor(account: AccountService) {
+    this.account = account;
+  }
+
 }
