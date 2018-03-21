@@ -3,7 +3,17 @@
     <img width="300" class="App-logo" alt="Angular Logo" [src]="logoUrl">
     <h1 class="App-title">Welcome to {{ title }}!</h1>
   </header>
-  <p class="App-intro">
-    To get started
-  </p>
- </div>
+  <div class="App-intro">
+    <div>
+      <label for="name">Name
+        <input name="name" required [value]="account.name" (input)="account.name=$event.target.value">
+      </label><br>
+      <label for="password">Password
+        <input name="password" type="password" required [value]="account.password" (input)="account.password=$event.target.value">
+      </label><br>
+      <button type="submit" (click)="addAccount()">Submit</button>
+    </div>
+    <h2>Account List</h2>
+    <account-list [accounts]="accounts"></account-list>
+  </div>
+</div>

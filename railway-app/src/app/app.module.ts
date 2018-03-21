@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoggerService } from './logger.service';
 import { BetterLoggerService } from './loggers/better-logger.service';
+import { AccountListComponent } from './accounts/account-list/account-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccountListComponent
   ],
   imports: [
     BrowserModule

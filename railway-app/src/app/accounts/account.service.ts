@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { LoggerService } from '../logger.service';
 
+export interface Account {
+  name: string;
+  password: string;
+}
+
 @Injectable()
 export class AccountService {
 
