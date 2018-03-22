@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoggerService } from './logger.service';
@@ -13,7 +14,8 @@ import { AccountListComponent } from './accounts/account-list/account-list.compo
     AccountListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [{provide: LoggerService, useClass: BetterLoggerService}],
   bootstrap: [AppComponent]

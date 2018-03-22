@@ -1,8 +1,9 @@
 import { Component, Inject, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NgForm }                      from '@angular/forms';
+import { NgForm, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { fromJS, List } from 'immutable';
 
-import { AccountService, Account } from './accounts/account.service';
+import { AccountService } from './accounts/account.service';
+import { Account } from './account';
 import { LoggerService } from './logger.service';
 
 @Component({
@@ -15,24 +16,20 @@ export class AppComponent {
   title = 'Angular App';
   logoUrl = '/assets/logo.svg';
 
-  @Input() account: Account = {name:'User', password:''};
+  account: Account;
   @ViewChild('accountForm') form: NgForm;
 
   accounts: Array<Account> = [];
   accountService: AccountService;
 
   constructor(private cd: ChangeDetectorRef, private logger: LoggerService) {
-    
-    setTimeout(() => {
-      // this.cd.detach();
-      this.account.name = 'MyName';
-    }, 2000);
+    this.account = {username: '', password: ''};
   }
 
-  addAccount() {
-    this.logger.log(JSON.stringify(this.account));
+  addAccount(user) {
+    this.logger.log(user.form.value);
 
-    this.accounts.push(fromJS(this.account));
+    this.accounts.push(fromJS(user.form.value));
   }
 
 }
