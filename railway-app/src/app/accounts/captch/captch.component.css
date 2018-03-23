@@ -1,0 +1,11 @@
+.touclick-hov {
+    position: absolute;
+    background-position: 0 -96px;
+    width: 27px;
+    height: 27px;
+    font-size: 0;
+}
+
+.touclick-bgimg {
+    background-image: url(/assets/captcha.png);
+}

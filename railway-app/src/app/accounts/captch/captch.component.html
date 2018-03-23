@@ -1,0 +1,5 @@
+<div style="position: relative;">
+  <img [src]="captchImage" (click)="catchClick($event)">
+  <div *ngFor="let click of touClicks" class="touclick-hov touclick-bgimg" 
+    [style.left.px]="click.x - 13" [style.top.px]="click.y - 13" (click)="removeClick(click)"></div>
+</div>

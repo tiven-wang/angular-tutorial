@@ -1,10 +1,12 @@
 import { Component, Inject, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { NgForm, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { fromJS, List } from 'immutable';
 
 import { AccountService } from './accounts/account.service';
 import { Account } from './account';
 import { LoggerService } from './logger.service';
+import { CaptchComponent } from './accounts/captch/captch.component';
 
 @Component({
   selector: 'App',
@@ -17,19 +19,32 @@ export class AppComponent {
   logoUrl = '/assets/logo.svg';
 
   account: Account;
-  @ViewChild('accountForm') form: NgForm;
 
   accounts: Array<Account> = [];
-  accountService: AccountService;
 
-  constructor(private cd: ChangeDetectorRef, private logger: LoggerService) {
+  captchImage: string;
+  captchPostions: string;
+
+  constructor(private cd: ChangeDetectorRef, private logger: LoggerService, private accountService: AccountService) {
     this.account = {username: '', password: ''};
+    this.accountService
+      .login()
+      .subscribe(image=> {
+        this.captchImage = image;
+      });
   }
 
   addAccount(user) {
     this.logger.log(user.form.value);
-
+    this.accountService.checkCaptcha(this.captchPostions)
+      .subscribe(body=> {
+        console.log(body);
+      })
     this.accounts.push(fromJS(user.form.value));
   }
 
+  captchPosition(event) {
+    console.log(event);
+    this.captchPostions = event;
+  }
 }
