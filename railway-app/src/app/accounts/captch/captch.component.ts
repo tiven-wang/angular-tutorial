@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-captch',
   templateUrl: './captch.component.html',
   styleUrls: ['./captch.component.css']
 })
-export class CaptchComponent implements OnInit {
+export class CaptchComponent implements OnInit, OnChanges {
 
   @Input() captchImage: string;
   @Output() position = new EventEmitter<string>();
@@ -16,6 +16,15 @@ export class CaptchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    
+    console.log(changes.captchImage);
+    if(changes.captchImage) {
+      this.touClicks = [];
+    }
+    // changes.prop contains the old and the new value...
   }
 
   catchClick(event: MouseEvent) {
