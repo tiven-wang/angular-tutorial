@@ -1,22 +1,35 @@
-<h2>Products</h2>
+<ui5-table class="demo-table" id="table_product">
+  <!-- Columns -->
+  <ui5-table-column slot="columns" width="12em">
+      <span style="line-height: 1.4rem" slot="header">Product</span>
+  </ui5-table-column>
 
-<div *ngFor="let product of products">
-  <h3>
-    <a [title]="product.Product + ' details'">
-      {{ product.Product }}
-    </a>
-  </h3>
+  <ui5-table-column slot="columns" min-width="800" popin-text="ProductName" demand-popin>
+      <span style="line-height: 1.4rem" slot="header">ProductName</span>
+  </ui5-table-column>
 
-  <p *ngIf="product.ProductName">
-    Name: {{ product.ProductName }}
-  </p>
+  <ui5-table-column slot="columns" min-width="600" popin-text="Price" demand-popin>
+      <span style="line-height: 1.4rem" slot="header">Price</span>
+  </ui5-table-column>
 
-  <button (click)="share()">
-    Share
-  </button>
-  
-  <app-product-alerts
-    [product]="product"
-    (notify)="onNotify()">
-  </app-product-alerts>
-</div>
+  <ui5-table-column slot="columns" min-width="600" popin-text="Share" demand-popin>
+    <span style="line-height: 1.4rem" slot="header">Share</span>
+  </ui5-table-column>
+
+  <ui5-table-column slot="columns">
+    <span style="line-height: 1.4rem" slot="header">Alerts</span>
+  </ui5-table-column>
+
+  <!-- Content -->
+  <ui5-table-row slot="rows" *ngFor="let product of products">
+    <ui5-table-cell slot="cells">{{ product.Product }}</ui5-table-cell>
+    <ui5-table-cell slot="cells">{{ product.ProductName }}</ui5-table-cell>
+    <ui5-table-cell slot="cells">{{ product.Price }}</ui5-table-cell>
+    <ui5-table-cell slot="cells">
+      <ui5-button type="Default" (press)="share()">Share</ui5-button>
+    </ui5-table-cell>
+    <ui5-table-cell slot="cells">
+      <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
+    </ui5-table-cell>
+  </ui5-table-row>
+</ui5-table>

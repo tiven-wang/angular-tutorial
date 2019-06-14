@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import "@ui5/webcomponents/dist/Button";
 
 @Component({
   selector: 'app-product-list',
