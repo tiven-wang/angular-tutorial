@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import "@ui5/webcomponents/dist/Button";
+import { ODataServiceFactory, ODataService } from "angular-odata-es5";
 
 @Component({
   selector: 'app-product-list',
@@ -7,33 +7,57 @@ import "@ui5/webcomponents/dist/Button";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[]
-  constructor() {
-    this.products = [
-      {
-        Product: "HT-1120",
-        ProductName: "英语国际无线蓝牙键盘",
-        Price: 800
-      },
-      {
-        Product: "HT-1023",
-        ProductName: "高端舒适",
-        Price: 500
-      }
-    ];
+  products: Product[]=[]
+  private odata: ODataService<Product>;
+  constructor(private odataFactory: ODataServiceFactory) {
+    this.odata = this.odataFactory.CreateService<Product>("SEPMRA_C_ALP_Product");
   }
 
   ngOnInit() {
+    this.getProducts();
   }
 
   share() {
+    
     window.alert('The product has been shared!');
   }
 
   onNotify() {
     window.alert('You will be notified when the product goes on sale');
   }
+
+  getOneProduct(id: string) {
+    this.odata.Get(id).Select("Product,ProductName,Price").Exec()
+      .subscribe(
+          product => {
+            console.info(product);
+          },
+          error => {
+            console.error(error);
+          }
+      );
+  }
+
+  getProducts(){
+    this.odata
+        .Query()                    //Creates a query object
+        .Top(10)
+        .Skip(0)
+        .OrderBy('Product desc')
+        // .Filter('')
+        .Select("Product,ProductName,Price")
+        .Exec()                     //Fires the request
+        .subscribe(                 //Subscribes to Observable<Array<T>>
+          products => {
+            this.products = this.products.concat(products);
+          },
+          error => {
+            console.error(error);   //Local error handler
+          });
+
+  }
 }
+
 
 export interface Product {
   Product: string,
