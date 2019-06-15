@@ -1,6 +1,6 @@
 # Angular Tutorial
 
-[Blog: Angular - Setup Dev Project](http://tiven.wang/articles/angular-setup-dev-project/)
+[Blog: Angular - Consume OData Services](http://tiven.wang/articles/angular-odata/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
 
