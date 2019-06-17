@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
-import { Product } from '../product-list/product-list.component';
+import { Product } from '../products/product.service';
 
 @Component({
   selector: 'app-product-alerts',
