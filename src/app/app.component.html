@@ -11,8 +11,10 @@
 </ui5-shellbar>
 
 <ui5-tabcontainer class="full-width" fixed show-overflow>
-	<ui5-tab text="Home"></ui5-tab>
-	<ui5-tab text="Products" selected>
+	<ui5-tab text="Home" selected>
+    <app-product-chart></app-product-chart>
+  </ui5-tab>
+	<ui5-tab text="Products" >
       <app-product-list></app-product-list>
   </ui5-tab>
 	<ui5-tab text="Who are we"></ui5-tab>

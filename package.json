@@ -21,6 +21,8 @@
     "@angular/router": "~8.0.1",
     "@ui5/webcomponents": "^0.12.0",
     "angular-odata-es5": "^0.8.1",
+    "echarts": "^4.2.1",
+    "ngx-echarts": "^4.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
@@ -30,6 +32,7 @@
     "@angular/cli": "~8.0.3",
     "@angular/compiler-cli": "~8.0.1",
     "@angular/language-service": "~8.0.1",
+    "@types/echarts": "^4.1.9",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
