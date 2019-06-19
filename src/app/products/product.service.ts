@@ -24,11 +24,11 @@ export class ProductService {
   getProducts(){
     return this.odata
             .Query()                    //Creates a query object
-            .Top(10)
+            .Top(20)
             .Skip(0)
             .OrderBy('Product desc')
             // .Filter('')
-            .Select("Product,ProductName,Price")
+            .Select("Product,ProductName,Price,Width,Height")
             .Exec()                     //Fires the request
 
   }
@@ -38,5 +38,7 @@ export interface Product {
   Product: string,
   ProductName: string,
   ProductDescription?: string,
-  Price: number
+  Price: number,
+  Width: number,
+  Height: number
 }
