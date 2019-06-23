@@ -21,9 +21,11 @@
   </ui5-table-column>
 
   <!-- Content -->
-  <ui5-table-row slot="rows" *ngFor="let product of products">
+  <ui5-table-row slot="rows" *ngFor="let product of (products$ | async); index as productId">
     <ui5-table-cell slot="cells">{{ product.Product }}</ui5-table-cell>
-    <ui5-table-cell slot="cells">{{ product.ProductName }}</ui5-table-cell>
+    <ui5-table-cell slot="cells">
+      <a [title]="product.ProductName + ' details'" [routerLink]="['/products', productId]">{{ product.ProductName }}</a>
+    </ui5-table-cell>
     <ui5-table-cell slot="cells">{{ product.Price }}</ui5-table-cell>
     <ui5-table-cell slot="cells">
       <ui5-button type="Default" (press)="share()">Share</ui5-button>
