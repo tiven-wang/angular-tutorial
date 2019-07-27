@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ODataServiceFactory, ODataService } from "angular-odata-es5";
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProductService {
 
   $skip: number = 0;
-  $top: number = 10;
+  $top: number = 30;
 
   products: Product[] = [];
 
@@ -16,7 +17,7 @@ export class ProductService {
   }
 
   getOneProduct(id: string) {
-    this.odata.Get(id).Select("Product,ProductName,Price").Exec()
+    this.odata.Get(id).Select("MainProductCategory,Product,ProductName,Price").Exec()
       .subscribe(
           product => {
             console.info(product);
@@ -27,14 +28,14 @@ export class ProductService {
       );
   }
 
-  getProducts(){
+  getProducts(): Observable<Array<Product>>{
     return this.odata
             .Query()                    //Creates a query object
             .Top(this.$top)
             .Skip(this.$skip)
             .OrderBy('Product desc')
             // .Filter('')
-            .Select("Product,ProductName,Price")
+            .Select("MainProductCategory,Product,ProductName,Price")
             .Exec()                     //Fires the request
             .pipe(map(ev => {
               this.$skip = this.$skip + this.$top;
@@ -46,6 +47,7 @@ export class ProductService {
 }
 
 export interface Product {
+  MainProductCategory: string,
   Product: string,
   ProductName: string,
   ProductDescription?: string,
